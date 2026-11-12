@@ -24,7 +24,8 @@
     "distribution",
     "LICENCA.md",
     "LICENSE.md",
-    "NOTICE.md"
+    "NOTICE.md",
+    "llms.txt"
   ],
   "sideEffects": [
     "**/*.css"
@@ -64,7 +65,7 @@
     "*.{json,md,yml,yaml,scss}": "prettier --write"
   },
   "dependencies": {
-    "@sharadox/web-library": "^0.5.0"
+    "@sharadox/web-library": "^0.7.0"
   },
   "devDependencies": {
     "@sharadox/es-lint-configuration-web-library": "^0.1.1",

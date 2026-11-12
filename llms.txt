@@ -1,0 +1,9 @@
+# @sharadox/privacy-web-library
+
+> GDPR (RGPD) privacy policies in English and Portuguese, written from what a site really collects.
+
+- /privacy-policy privacyPolicy(options, "en" | "pt") → { title, updated ("Last updated: November 12, 2026"), sections [{ title, paragraphs, items? }] }
+- options: controller { name, legalName?, taxNumber?, address, email, phone?, website }, updated "YYYY-MM-DD", contactForm? { fields: Words[], retentionMonths? = 24 }, remembered?: Words[], consentRecord?, maps?, recipients [{ name, purpose: Words, location: Words }], authority? (CNPD by default); Words = { en, pt }
+- Sections: who we are; what we collect and why (form: Art. 6(1)(b); host records: 6(1)(f); device storage: Lei 41/2004 art. 5; Google Maps: consent 6(1)(a)); who receives it; transfers outside the EU (DPF or SCCs); retention; rights (7); how to ask or complain; changes
+- /privacy-policy-view <PrivacyPolicyView policy className? /> → div > p small (date) + section > h2, p, ul; unstyled
+- License: Sharadox Open Source License 0.1.0
