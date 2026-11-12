@@ -1,0 +1,1 @@
+{ "extends": ["./tsconfig.json", "@sharadox/type-script-configuration-web-library/library-build.json"] }

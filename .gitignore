@@ -1,0 +1,10 @@
+node_modules/
+.turbo/
+distribution/
+documentation/
+*.tsbuildinfo
+*.tgz
+.env*
+!.env.example
+turbo.json
+/coverage/
