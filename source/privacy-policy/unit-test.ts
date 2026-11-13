@@ -120,3 +120,14 @@ test("writes every part in Portuguese, and a bare site in English", () => {
   expect(english).toContain("The site keeps your cookie choices on your device");
   expect(english).not.toContain("Messages are kept");
 });
+
+test("sends rights requests to the phone when there is no email", () => {
+  const options = {
+    controller: { name: "Bar", address: "Vale do Lobo", phone: "+351 289 000 000", website: "https://bar.pt" },
+    updated: "2026-11-13",
+    recipients: [],
+  };
+  expect(text(privacyPolicy(options, "en"))).toContain("Call us on +351 289 000 000; we answer within one month.");
+  expect(text(privacyPolicy(options, "pt"))).toContain("Ligue-nos para +351 289 000 000; respondemos");
+  expect(text(privacyPolicy(options, "en"))).toContain("You can reach us at +351 289 000 000.");
+});
