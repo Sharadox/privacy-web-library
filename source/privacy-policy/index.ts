@@ -149,8 +149,8 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
       title: en ? "How to ask, or complain" : "Como pedir, ou reclamar",
       paragraphs: [
         en
-          ? `Write to ${controller.email}; we answer within one month. If you think we have not handled your data properly, you may complain to the ${authority.name} (${authority.url}).`
-          : `Escreva para ${controller.email}; respondemos no prazo de um mês. Se considerar que não tratámos bem os seus dados, pode apresentar reclamação à ${authority.name} (${authority.url}).`,
+          ? `${controller.email ? `Write to ${controller.email}` : `Call us on ${controller.phone}`}; we answer within one month. If you think we have not handled your data properly, you may complain to the ${authority.name} (${authority.url}).`
+          : `${controller.email ? `Escreva para ${controller.email}` : `Ligue-nos para ${controller.phone}`}; respondemos no prazo de um mês. Se considerar que não tratámos bem os seus dados, pode apresentar reclamação à ${authority.name} (${authority.url}).`,
       ],
     },
     {

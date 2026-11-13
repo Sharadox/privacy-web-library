@@ -14,7 +14,8 @@ export interface Controller {
   taxNumber?: string;
   /** The postal address, on one line. */
   address: string;
-  email: string;
+  /** Where rights requests go; at least one of `email` and `phone`. */
+  email?: string;
   phone?: string;
   /** The site's address, for example "https://luispiresdecor.com". */
   website: string;

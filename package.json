@@ -1,6 +1,6 @@
 {
   "name": "@sharadox/privacy-web-library",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "GDPR privacy policies for websites, in English and Portuguese, written from what each site really collects.",
   "private": false,
   "license": "SEE LICENSE IN LICENCA.md",
