@@ -46,7 +46,7 @@ const policy = privacyPolicy(
 
 **Options:**
 
-- **`controller`:** `name`, `legalName?`, `taxNumber?`, `address`, `email`, `phone?`, `website`.
+- **`controller`:** `name`, `legalName?`, `taxNumber?`, `address`, `email?`, `phone?` (at least one of the two), `website`.
 - **`updated`:** the date the policy last changed.
 - **`contactForm?`:** `{ fields, retentionMonths? = 24 }`.
 - **`remembered?`:** what the site keeps on the device.
