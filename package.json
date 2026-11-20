@@ -1,6 +1,6 @@
 {
   "name": "@sharadox/privacy-web-library",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "GDPR privacy policies for websites, in English and Portuguese, written from what each site really collects.",
   "private": false,
   "license": "SEE LICENSE IN LICENCA.md",
@@ -65,7 +65,7 @@
     "*.{json,md,yml,yaml,scss}": "prettier --write"
   },
   "dependencies": {
-    "@sharadox/web-library": "^0.7.0"
+    "@sharadox/web-library": "^0.8.0"
   },
   "devDependencies": {
     "@sharadox/es-lint-configuration-web-library": "^0.1.1",
