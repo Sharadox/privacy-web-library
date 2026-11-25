@@ -24,7 +24,7 @@ const list = (items: readonly string[], locale: PrivacyLocale) =>
  * const policy = privacyPolicy({ controller, updated: "2026-11-12", recipients: [vercel] }, "pt");
  */
 export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): PrivacyPolicy {
-  const { controller, contactForm, remembered = [], consentRecord, maps, recipients } = options;
+  const { controller, contactForm, remembered = [], consentRecord, maps, recipients, accounts } = options;
   const authority = options.authority ?? CNPD;
   const say = (words: Words) => words[locale];
   const en = locale === "en";
@@ -46,6 +46,19 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
         ? `When you send us a message through the form, we receive what you write in it (${fields}) and the address of your internet connection (IP address), which we use only to stop abuse. We use your message to answer you and arrange what you ask for. The legal basis is taking steps at your request before a contract (Article 6(1)(b) GDPR).`
         : `Quando nos envia uma mensagem pelo formulário, recebemos o que escreve (${fields}) e o endereço da sua ligação à internet (endereço IP), que usamos apenas para impedir abusos. Usamos a sua mensagem para lhe responder e tratar do que nos pede. O fundamento é a realização de diligências pré-contratuais a seu pedido (artigo 6.º, n.º 1, alínea b) do RGPD).`,
     );
+  }
+  if (accounts) {
+    collected.push(
+      en
+        ? "When you create an account, we keep its name, its identifier, the emails you add, the picture you choose (if any), the devices it is signed in on (the browser's description, when it signed in and was last seen), a history of what happened to it (sign-ins, changes, codes sent), and, if you turn on two-step verification, its key (encrypted) and recovery codes (as one-way codes). Sign-in codes are kept only as one-way codes and for minutes. We use all this to give you the account and keep it safe. The legal basis is the contract you accept by creating it (Article 6(1)(b) GDPR); protecting accounts from abuse (limits on attempts, based on one-way codes of IP addresses) is our legitimate interest (Article 6(1)(f) GDPR)."
+        : "Quando cria uma conta, guardamos o nome, o identificador, os emails que adicionar, a fotografia que escolher (se escolher), os dispositivos onde tem sessão iniciada (a descrição do navegador, quando entrou e quando foi visto), um histórico do que lhe aconteceu (entradas, alterações, códigos enviados) e, se ligar a verificação em dois passos, a sua chave (cifrada) e os códigos de recuperação (como códigos irreversíveis). Os códigos para entrar só são guardados como códigos irreversíveis, e por minutos. Usamos tudo isto para lhe dar a conta e a manter segura. O fundamento é o contrato que aceita ao criá-la (artigo 6.º, n.º 1, alínea b) do RGPD); proteger as contas de abusos (limites de tentativas, com códigos irreversíveis dos endereços IP) é o nosso interesse legítimo (artigo 6.º, n.º 1, alínea f) do RGPD).",
+    );
+    if (accounts.banLedger)
+      collected.push(
+        en
+          ? "To enforce the rules, we keep only a one-way code (HMAC) of the emails of a deleted account that was banned, until its ban ends (for good, for a permanent ban), so it can't come back as a new account. Nobody can read the emails back from these codes. The legal basis is our legitimate interest in keeping the service safe (Article 6(1)(f) GDPR)."
+          : "Para fazer cumprir as regras, guardamos apenas um código irreversível (HMAC) dos emails de uma conta suspensa que foi eliminada, até ao fim da suspensão (para sempre, numa suspensão permanente), para que não possa voltar como conta nova. Ninguém consegue obter os emails a partir destes códigos. O fundamento é o nosso interesse legítimo em manter o serviço seguro (artigo 6.º, n.º 1, alínea f) do RGPD).",
+      );
   }
   collected.push(
     en
@@ -113,6 +126,13 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
                 : `As mensagens são guardadas durante ${months} meses após o nosso último contacto, salvo se fizerem parte de um contrato ou a lei exigir que as guardemos mais tempo.`,
             ]
           : []),
+        ...(accounts
+          ? [
+              en
+                ? `An account is kept until you delete it, or after ${accounts.inactivityYears} ${accounts.inactivityYears === 1 ? "year" : "years"} without anyone signing in, warning you by email before (6 months, 3 months, 1 month, 1 week and 1 day before). Deleting it removes everything in it at once, except what reaches our backups, which are kept for ${accounts.backupDays} days, encrypted, and then deleted.`
+                : `Uma conta é guardada até a eliminar, ou depois de ${accounts.inactivityYears} ${accounts.inactivityYears === 1 ? "ano" : "anos"} sem que ninguém entre nela, avisando-o por email antes (6 meses, 3 meses, 1 mês, 1 semana e 1 dia antes). Eliminá-la apaga logo tudo o que contém, exceto o que estiver nas cópias de segurança, que são guardadas durante ${accounts.backupDays} dias, cifradas, e depois apagadas.`,
+            ]
+          : []),
         en
           ? "What the site keeps on your device stays until you clear it in your browser."
           : "O que o site guarda no seu dispositivo fica até o apagar no seu navegador.",
@@ -148,6 +168,13 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
     {
       title: en ? "How to ask, or complain" : "Como pedir, ou reclamar",
       paragraphs: [
+        ...(accounts
+          ? [
+              en
+                ? "With an account, you can do most of this yourself in its Account settings: correct your name and identifier, download all its data as a file, and delete it."
+                : "Com uma conta, pode fazer quase tudo isto nas Definições da conta: corrigir o nome e o identificador, descarregar todos os dados num ficheiro, e eliminá-la.",
+            ]
+          : []),
         en
           ? `${controller.email ? `Write to ${controller.email}` : `Call us on ${controller.phone}`}; we answer within one month. If you think we have not handled your data properly, you may complain to the ${authority.name} (${authority.url}).`
           : `${controller.email ? `Escreva para ${controller.email}` : `Ligue-nos para ${controller.phone}`}; respondemos no prazo de um mês. Se considerar que não tratámos bem os seus dados, pode apresentar reclamação à ${authority.name} (${authority.url}).`,
