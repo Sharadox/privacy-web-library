@@ -43,6 +43,12 @@ export interface PrivacyOptions {
   consentRecord?: boolean;
   /** True when the site shows Google Maps once the visitor allows it. */
   maps?: boolean;
+  /**
+   * An account system: accounts are deleted after `inactivityYears` without a sign-in (after email warnings),
+   * backups kept `backupDays`, and, with `banLedger`, a deleted banned account's emails kept as one-way codes until
+   * the ban ends.
+   */
+  accounts?: { inactivityYears: number; backupDays: number; banLedger: boolean };
   /** Everyone who handles the data for the controller. */
   recipients: readonly Recipient[];
   /** Where to complain; Portugal's CNPD by default. */

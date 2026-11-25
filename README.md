@@ -49,6 +49,7 @@ const policy = privacyPolicy(
 - **`controller`:** `name`, `legalName?`, `taxNumber?`, `address`, `email?`, `phone?` (at least one of the two), `website`.
 - **`updated`:** the date the policy last changed.
 - **`contactForm?`:** `{ fields, retentionMonths? = 24 }`.
+- **`accounts?`:** `{ inactivityYears, backupDays, banLedger }`, for an account system: what an account holds and why, how long it is kept (deleted after `inactivityYears` without a sign-in, after warnings; backups `backupDays`), the banned-contact ledger when `banLedger`, and that the account's settings let the person correct, download and delete it.
 - **`remembered?`:** what the site keeps on the device.
 - **`consentRecord?`:** true when a cookie panel records choices.
 - **`maps?`:** true when Google Maps loads with consent.

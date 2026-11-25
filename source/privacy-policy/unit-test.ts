@@ -131,3 +131,39 @@ test("sends rights requests to the phone when there is no email", () => {
   expect(text(privacyPolicy(options, "pt"))).toContain("Ligue-nos para +351 289 000 000; respondemos");
   expect(text(privacyPolicy(options, "en"))).toContain("You can reach us at +351 289 000 000.");
 });
+
+describe("an account system", () => {
+  const accounts = { ...full, accounts: { inactivityYears: 2, backupDays: 35, banLedger: true } };
+  const text = (locale: "en" | "pt") =>
+    privacyPolicy(accounts, locale)
+      .sections.flatMap(({ paragraphs, items = [] }) => [...paragraphs, ...items])
+      .join("\n");
+
+  test("says what an account holds, why, for how long, and how to download or delete it", () => {
+    const english = text("en");
+    expect(english).toContain("When you create an account, we keep its name, its identifier, the emails you add");
+    expect(english).toContain("Article 6(1)(b) GDPR");
+    expect(english).toContain("after 2 years without anyone signing in");
+    expect(english).toContain("warning you by email before");
+    expect(english).toContain("backups, which are kept for 35 days");
+    expect(english).toContain("Account settings");
+    expect(english).toContain("only a one-way code (HMAC) of the emails of a deleted account that was banned");
+  });
+
+  test("in Portuguese, and without the ban ledger when there is none", () => {
+    expect(text("pt")).toContain("Quando cria uma conta, guardamos o nome, o identificador, os emails que adicionar");
+    expect(text("pt")).toContain("depois de 2 anos sem que ninguém entre nela");
+    const plain = privacyPolicy({ ...full, accounts: { inactivityYears: 1, backupDays: 7, banLedger: false } }, "en")
+      .sections.flatMap(({ paragraphs }) => paragraphs)
+      .join("\n");
+    expect(plain).toContain("after 1 year without anyone signing in");
+    expect(plain).not.toContain("HMAC");
+    const portuguese = privacyPolicy(
+      { ...full, accounts: { inactivityYears: 1, backupDays: 7, banLedger: false } },
+      "pt",
+    )
+      .sections.flatMap(({ paragraphs }) => paragraphs)
+      .join("\n");
+    expect(portuguese).toContain("depois de 1 ano sem que ninguém entre nela");
+  });
+});
