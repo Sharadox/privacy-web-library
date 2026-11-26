@@ -51,7 +51,7 @@ describe("privacyPolicy", () => {
     expect(all).toContain("Vercel: hosts the site (United States)");
     expect(all).toContain("Messages are kept for 12 months");
     expect(all).toContain("Comissão Nacional de Proteção de Dados (CNPD) (https://www.cnpd.pt)");
-    expect(policy.sections.find((section) => section.title === "Your rights")!.items).toHaveLength(7);
+    expect(policy.sections.find((section) => section.title === "Your Rights")!.items).toHaveLength(7);
   });
 
   test("leaves out what a site does not do, in Portuguese", () => {
@@ -166,4 +166,28 @@ describe("an account system", () => {
       .join("\n");
     expect(portuguese).toContain("depois de 1 ano sem que ninguém entre nela");
   });
+});
+
+test("every heading is in Title Case, in both languages", () => {
+  expect([privacyPolicy(full, "en").title, ...privacyPolicy(full, "en").sections.map(({ title }) => title)]).toEqual([
+    "Privacy Policy",
+    "Who We Are",
+    "What We Collect, and Why",
+    "Who Receives It",
+    "Transfers Outside the European Union",
+    "How Long We Keep It",
+    "Your Rights",
+    "How to Ask, or Complain",
+    "Changes",
+  ]);
+  expect(privacyPolicy(full, "pt").sections.map(({ title }) => title)).toEqual([
+    "Quem Somos",
+    "O que Recolhemos, e Porquê",
+    "Quem os Recebe",
+    "Transferências para Fora da União Europeia",
+    "Durante Quanto Tempo os Guardamos",
+    "Os Seus Direitos",
+    "Como Pedir, ou Reclamar",
+    "Alterações",
+  ]);
 });
