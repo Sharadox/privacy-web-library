@@ -91,16 +91,16 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
 
   const sections: PolicySection[] = [
     {
-      title: en ? "Who we are" : "Quem somos",
+      title: en ? "Who We Are" : "Quem Somos",
       paragraphs: [
         en
           ? `${legalName}${controller.taxNumber ? ` (NIPC ${controller.taxNumber})` : ""}, ${controller.address}, is responsible for the personal data handled through ${controller.website}. You can reach us at ${list(reach, locale)}.`
           : `${legalName}${controller.taxNumber ? ` (NIPC ${controller.taxNumber})` : ""}, ${controller.address}, é responsável pelos dados pessoais tratados através de ${controller.website}. Pode contactar-nos por ${list(reach, locale)}.`,
       ],
     },
-    { title: en ? "What we collect, and why" : "O que recolhemos, e porquê", paragraphs: collected },
+    { title: en ? "What We Collect, and Why" : "O que Recolhemos, e Porquê", paragraphs: collected },
     {
-      title: en ? "Who receives it" : "Quem os recebe",
+      title: en ? "Who Receives It" : "Quem os Recebe",
       paragraphs: [
         en
           ? "Only the companies that run the services the site needs, bound by contract to use the data solely for that:"
@@ -109,7 +109,7 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
       items: recipients.map((recipient) => `${recipient.name}: ${say(recipient.purpose)} (${say(recipient.location)})`),
     },
     {
-      title: en ? "Transfers outside the European Union" : "Transferências para fora da União Europeia",
+      title: en ? "Transfers Outside the European Union" : "Transferências para Fora da União Europeia",
       paragraphs: [
         en
           ? "Some of these companies are based in, or use servers in, the United States. Those transfers rely on the EU–US Data Privacy Framework or on the European Commission's standard contractual clauses."
@@ -117,7 +117,7 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
       ],
     },
     {
-      title: en ? "How long we keep it" : "Durante quanto tempo os guardamos",
+      title: en ? "How Long We Keep It" : "Durante Quanto Tempo os Guardamos",
       paragraphs: [
         ...(contactForm
           ? [
@@ -139,7 +139,7 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
       ],
     },
     {
-      title: en ? "Your rights" : "Os seus direitos",
+      title: en ? "Your Rights" : "Os Seus Direitos",
       paragraphs: [
         en
           ? `You may ask us, at any time and free of charge, to:`
@@ -166,7 +166,7 @@ export function privacyPolicy(options: PrivacyOptions, locale: PrivacyLocale): P
           ],
     },
     {
-      title: en ? "How to ask, or complain" : "Como pedir, ou reclamar",
+      title: en ? "How to Ask, or Complain" : "Como Pedir, ou Reclamar",
       paragraphs: [
         ...(accounts
           ? [
